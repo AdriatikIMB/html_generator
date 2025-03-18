@@ -9,23 +9,46 @@
 <body>
     <h1>HTML-generator</h1>
 
-    <!-- Input-felt for å skrive inn en farge og endre bakgrunnen -->
-    <input type="text" id="colorInput" placeholder="Skriv inn en farge">
+    <!-- Input for bakgrunnsfarge -->
+    <label for="colorInput">Velg bakgrunnsfarge:</label>
+    <input type="text" id="colorInput" placeholder="F.eks. blue eller #ff0000">
     <button onclick="changeBackgroundColor()">Endre bakgrunn</button>
     
     <br><br>
     
-    <!-- Input-felt for å skrive inn tekst og legge til HTML-elementer -->
-    <input type="text" id="textInput" placeholder="Skriv inn tekst">
+    <!-- Input for å legge til HTML-elementer -->
+    <label for="elementType">Velg elementtype:</label>
     <select id="elementType">
         <option value="h1">Overskrift (H1)</option>
+        <option value="h2">Overskrift (H2)</option>
         <option value="p">Paragraf</option>
+        <option value="ul">Uordnet liste</option>
+        <option value="ol">Ordnet liste</option>
         <option value="li">Listeelement</option>
     </select>
+    
+    <label for="textInput">Skriv inn tekst:</label>
+    <input type="text" id="textInput" placeholder="Tekst for elementet">
+    
+    <label for="colorPicker">Velg tekstfarge:</label>
+    <input type="color" id="colorPicker">
+    
+    <label for="positionPicker">Velg plassering:</label>
+    <select id="positionPicker">
+        <option value="contentArea">Hovedområde</option>
+        <option value="customArea">Egendefinert område</option>
+    </select>
+    
     <button onclick="addElement()">Legg til element</button>
     
-    <!-- Område der nye elementer legges til -->
+    <br><br>
+    
+    <!-- Områder der nye elementer legges til -->
+    <h2>Hovedområde</h2>
     <div id="contentArea"></div>
+    
+    <h2>Egendefinert område</h2>
+    <div id="customArea"></div>
     
     <script src="script.js"></script> <!-- Kobler til JavaScript-filen -->
 </body>

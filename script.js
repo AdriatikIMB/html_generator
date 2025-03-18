@@ -3,7 +3,10 @@ function changeBackgroundColor() {
     document.body.style.backgroundColor = color;
 }
 
-function displayText() {
+function addElement() {
     let text = document.getElementById("textInput").value;
-    document.getElementById("displayText").innerText = text;
+    let elementType = document.getElementById("elementType").value;
+    let newElement = document.createElement(elementType);
+    newElement.innerText = text;
+    document.getElementById("contentArea").appendChild(newElement);
 }

@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML-generator</title>
-    <link rel="stylesheet" href="styles.css">  <!-- Kobler til CSS-filen -->
+    <link rel="stylesheet" href="styles.css">  
 </head>
 <body>
     <h1>HTML-generator</h1>
 
-    <!-- Input for bakgrunnsfarge -->
+
     <label for="colorInput">Velg bakgrunnsfarge:</label>
     <input type="text" id="colorInput" placeholder="F.eks. blue eller #ff0000">
     <button onclick="changeBackgroundColor()">Endre bakgrunn</button>
     
     <br><br>
     
-    <!-- Input for å legge til HTML-elementer -->
     <label for="elementType">Velg elementtype:</label>
     <select id="elementType">
         <option value="h1">Overskrift (H1)</option>
@@ -43,13 +42,13 @@
     
     <br><br>
     
-    <!-- Områder der nye elementer legges til -->
+
     <h2>Hovedområde</h2>
     <div id="contentArea"></div>
     
     <h2>Egendefinert område</h2>
     <div id="customArea"></div>
     
-    <script src="script.js"></script> <!-- Kobler til JavaScript-filen -->
+    <script src="script.js"></script>
 </body>
 </html>

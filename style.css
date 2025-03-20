@@ -9,6 +9,10 @@ h1 {
     color: #333;
 }
 
+section {
+    margin-bottom: 20px;
+}
+
 label {
     font-weight: bold;
     margin-right: 5px;
@@ -16,7 +20,7 @@ label {
 
 input, select, button {
     margin: 5px;
-    padding: 8px;
+    padding: 10px;
     font-size: 1em;
 }
 
@@ -25,6 +29,7 @@ button {
     color: white;
     border: none;
     cursor: pointer;
+    padding: 10px;
 }
 
 button:hover {
@@ -37,4 +42,13 @@ button:hover {
     margin-top: 10px;
     min-height: 50px;
     background-color: white;
+}
+
+#contentAreaCounter, #customAreaCounter {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+h2 {
+    color: #333;
 }

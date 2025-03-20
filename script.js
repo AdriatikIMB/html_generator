@@ -15,17 +15,41 @@ function addElement() {
     newElement.textContent = text;
     newElement.style.color = "#" + color;
 
+    var editInput = document.createElement("input");
+    editInput.type = "text";
+    editInput.value = text;
+
+    var editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.addEventListener("click", function() {
+        newElement.textContent = editInput.value;
+    });
+
     var removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
     removeButton.addEventListener("click", function() {
         newElement.remove();
+        if (position === "contentArea") {
+            contentAreaCounter--;
+        } else if (position === "customArea") {
+            customAreaCounter--;
+        }
+        updateCounters();
     });
 
     if (position === "contentArea") {
         document.getElementById("contentArea").appendChild(newElement);
+        document.getElementById("contentArea").appendChild(editInput);
+        document.getElementById("contentArea").appendChild(editButton);
         document.getElementById("contentArea").appendChild(removeButton);
+        contentAreaCounter++;
     } else if (position === "customArea") {
         document.getElementById("customArea").appendChild(newElement);
+        document.getElementById("customArea").appendChild(editInput);
+        document.getElementById("customArea").appendChild(editButton);
         document.getElementById("customArea").appendChild(removeButton);
+        customAreaCounter++;
     }
+
+    updateCounters();
 }

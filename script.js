@@ -3,6 +3,8 @@ function changeBackgroundColor() {
     document.body.style.backgroundColor = colorInput;
 }
 
+var contentAreaCounter = 0;
+var customAreaCounter = 0;
 function addElement() {
     var elementType = document.getElementById("elementType").value;
     var text = document.getElementById("textInput").value;
@@ -13,9 +15,17 @@ function addElement() {
     newElement.textContent = text;
     newElement.style.color = "#" + color;
 
+    var removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.addEventListener("click", function() {
+        newElement.remove();
+    });
+
     if (position === "contentArea") {
         document.getElementById("contentArea").appendChild(newElement);
+        document.getElementById("contentArea").appendChild(removeButton);
     } else if (position === "customArea") {
         document.getElementById("customArea").appendChild(newElement);
+        document.getElementById("customArea").appendChild(removeButton);
     }
 }

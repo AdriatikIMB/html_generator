@@ -14,19 +14,19 @@ function addElement() {
     var newElement = document.createElement(elementType);
     newElement.textContent = text;
     newElement.style.color = "#" + color;
-
-    var editInput = document.createElement("input");
-    editInput.type = "text";
-    editInput.value = text;
+    newElement.classList.add("draggable");
 
     var editButton = document.createElement("button");
-    editButton.textContent = "Edit";
+    editButton.textContent = "Rediger";
     editButton.addEventListener("click", function() {
-        newElement.textContent = editInput.value;
+        var newText = prompt("Skriv inn ny tekst:", newElement.textContent);
+        if (newText !== null) {
+            newElement.textContent = newText;
+        }
     });
 
     var removeButton = document.createElement("button");
-    removeButton.textContent = "Remove";
+    removeButton.textContent = "Fjern";
     removeButton.addEventListener("click", function() {
         newElement.remove();
         updateCounters();
@@ -34,65 +34,39 @@ function addElement() {
 
     var targetArea = document.getElementById(position);
     targetArea.appendChild(newElement);
-    targetArea.appendChild(editInput);
     targetArea.appendChild(editButton);
     targetArea.appendChild(removeButton);
 
     updateCounters();
+    enableDragAndDrop();
 }
 
 // Sorter elementene i valgt område
 function sortArea(areaId) {
     var area = document.getElementById(areaId);
-    var elements = Array.from(area.children); // Hent alle barna (elementene)
+    var elements = Array.from(area.children);
+    elements.sort((a, b) => a.textContent.localeCompare(b.textContent));
 
-    // Filtrer ut input og knapper for å bare sortere faktiske elementer (ikke input, edit, remove)
-    elements = elements.filter(function(element) {
-        return element.tagName !== 'INPUT' && element.tagName !== 'BUTTON';
-    });
-
-
-    var headers = elements.filter(function(element) {
-        return element.tagName === 'H1';
-    });
-
-    var nonHeaders = elements.filter(function(element) {
-        return element.tagName !== 'H1';
-    });
-
-    // Sorter de ikke-overskridne elementene alfabetisk basert på tekstinnhold
-    nonHeaders.sort(function(a, b) {
-        return a.textContent.localeCompare(b.textContent);
-    });
-
-    // Først legg til overskriftene (H1) og deretter de andre elementene
-    var sortedElements = headers.concat(nonHeaders);
-
-    area.innerHTML = ''; // Fjern eksisterende elementer
-    sortedElements.forEach(function(element) {
-        area.appendChild(element); // Legg til de sorterte elementene
-    });
-
-    // Legg til input og knapper tilbake etter sortering
-    sortedElements.forEach(function(element) {
-        area.appendChild(element.nextSibling); // Input
-        area.appendChild(element.nextSibling); // Edit button
-        area.appendChild(element.nextSibling); // Remove button
-    });
+    area.innerHTML = '';
+    elements.forEach(element => area.appendChild(element));
 
     updateCounters();
 }
 
 // Oppdater tellere
 function updateCounters() {
-    document.getElementById("contentAreaCounter").textContent = "Content Area: " + document.getElementById("contentArea").children.length / 4; // Dividerer med 4 siden vi har 4 elementer per sett (tekst, input, edit, remove)
-    document.getElementById("customAreaCounter").textContent = "Custom Area: " + document.getElementById("customArea").children.length / 4;
+    document.getElementById("contentAreaCounter").textContent = "Content Area: " + document.getElementById("contentArea").children.length / 3;
+    document.getElementById("customAreaCounter").textContent = "Custom Area: " + document.getElementById("customArea").children.length / 3;
 }
 
-// Endre teksten på et element uavhengig av sorteringen
-function editText(element) {
-    var newText = prompt("Skriv inn ny tekst:", element.textContent);
-    if (newText !== null) {
-        element.textContent = newText;
-    }
+// Enable drag and drop using Dragula
+function enableDragAndDrop() {
+    dragula([document.getElementById('contentArea'), document.getElementById('customArea')])
+        .on('drop', function() {
+            updateCounters();
+        });
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    enableDragAndDrop();
+});
